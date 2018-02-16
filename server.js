@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise;
 const { PORT, DATABASE_URL } = require('./config');
 const { Restaurant } = require('./models');
 
+// calling express creates a new app instance
 const app = express();
 app.use(bodyParser.json());
 

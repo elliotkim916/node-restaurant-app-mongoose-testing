@@ -87,18 +87,23 @@ describe('Restaurants API resource', function() {
   // otherwise we'd need to call a `done` callback. `runServer`,
   // `seedRestaurantData` and `tearDownDb` each return a promise,
   // so we return the value returned by these function calls.
+
+  // starts server
   before(function() {
     return runServer(TEST_DATABASE_URL);
   });
 
+  // seeds database with test data before each test runs
   beforeEach(function() {
     return seedRestaurantData();
   });
 
+  // zeroes out database after each test has run, tears down database after each test
   afterEach(function() {
     return tearDownDb();
   });
 
+  // closes server
   after(function() {
     return closeServer();
   });
@@ -194,7 +199,7 @@ describe('Restaurants API resource', function() {
 
           mostRecentGrade = newRestaurant.grades.sort(
             (a, b) => b.date - a.date)[0].grade;
-
+// grades = [{grade: 'A', date: '01-05-2017'}, {grade: 'B', date: '01-09-2017'}];
           expect(res.body.grade).to.equal(mostRecentGrade);
           return Restaurant.findById(res.body.id);
         })
